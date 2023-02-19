@@ -4,12 +4,11 @@ resource "aws_route_table" "rtb" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gw.id
-
-    tags = {
-    Name = "MyRoute"
-    }
   }
- 
+
+  tags = {
+    Name = "MyRoute"
+  }
 }
 
 resource "aws_route_table_association" "a" {
@@ -18,18 +17,16 @@ resource "aws_route_table_association" "a" {
   count = 2
 }
 
-//Adding NAT gateway to the default main route table
-
-resource "aws_route_table_association" "DefaultRouteTable" {
+//Adding NAT Gateway into the default main route table
+resource "aws_default_route_table" "default_rtb" {
   default_route_table_id = aws_vpc.main.default_route_table_id
 
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_nat_gateway.natgw.id
+  }
 
-    tags = {
-    Name = "DefaultRouteTable"
-    }
-
+  tags = {
+    Name = "default_rtb"
   }
 }

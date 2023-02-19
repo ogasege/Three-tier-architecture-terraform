@@ -1,5 +1,5 @@
 resource "aws_instance" "web" {
-  ami           = "ami-0aa7d40eeae50c9a9"
+  ami           = "ami-0dfcb1ef8550277af"
   instance_type = "t2.micro"
   key_name = "threetier"
   subnet_id = aws_subnet.public[count.index].id
@@ -19,14 +19,14 @@ resource "aws_instance" "web" {
     connection {
         type = "ssh"
         host = self.public_ip
-        user = ec2-user
+        user = "ec2-user"
         private_key = "${file("./threetier.pem")}"
     }
   }   
 }
 
 resource "aws_instance" "database" {
-  ami           = "ami-0aa7d40eeae50c9a9"
+  ami           = "ami-0dfcb1ef8550277af"
   instance_type = "t2.micro"
   key_name = "threetier"
   subnet_id = aws_subnet.private.id

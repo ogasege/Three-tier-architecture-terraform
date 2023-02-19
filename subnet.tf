@@ -3,7 +3,7 @@
 resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.main.id
   cidr_block = var.cidr[count.index]
-  availabilty_zone = var.az[count.index]
+  availability_zone = var.az[count.index]
   count = 2 
 
   tags = {
@@ -15,7 +15,7 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.3.0/24"
-  availabilty_zone = "us-west-2b"
+  availability_zone = "us-west-2b"
   
 
   tags = {
