@@ -7,7 +7,7 @@ resource "aws_subnet" "public" {
   count = 2 
 
   tags = {
-    Name = "Public-subnet"
+    Name = "public-subnet"
   }
 }
 
@@ -19,7 +19,7 @@ resource "aws_subnet" "private" {
   
 
   tags = {
-    Name = "Private-subnet"
+    Name = "private-subnet"
   }
 }
 
