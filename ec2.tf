@@ -1,7 +1,7 @@
 resource "aws_instance" "web" {
   ami           = "ami-0aa7d40eeae50c9a9"
   instance_type = "t2.micro"
-  key_name = "pswain"
+  key_name = "threetier"
   subnet_id = aws_subnet.public[count.index].id
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   associate_public_ip_address = "true"
@@ -13,14 +13,14 @@ resource "aws_instance" "web" {
   }
 
   provisioner "file" {
-    source = "./pswain.pem"
-    destination = "/home/ec2-user/pswain.pem"
+    source = "./threetier.pem"
+    destination = "/home/ec2-user/threetier.pem"
 
     connection {
         type = "ssh"
         host = self.public_ip
         user = ec2-user
-        private_key = "${file("./pswain.pem")}"
+        private_key = "${file("./threetier.pem")}"
     }
   }   
 }
@@ -28,7 +28,7 @@ resource "aws_instance" "web" {
 resource "aws_instance" "database" {
   ami           = "ami-0aa7d40eeae50c9a9"
   instance_type = "t2.micro"
-  key_name = "pswain"
+  key_name = "threetier"
   subnet_id = aws_subnet.private.id
   vpc_security_group_ids = [aws_security_group.allow_tls_db.id]
 
